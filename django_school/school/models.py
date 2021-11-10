@@ -51,7 +51,7 @@ class Theme(models.Model):
 class Question(models.Model):
     name = models.TextField()
     created_at = models.DateField(default=date.today)
-    image_file = models.ImageField(upload_to="question_images/")
+    image_file = models.ImageField(upload_to="question_images/", default=None)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='questions')
     grades = models.ManyToManyField(Grade, through='QuestionForGrade')
 

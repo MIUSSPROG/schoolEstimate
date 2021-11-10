@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Grade, Profile
+from .models import Grade, Profile, Theme, Question
 
 
 class GradeListSerializer(serializers.ModelSerializer):
@@ -44,3 +44,35 @@ class ProfileCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = "__all__"
+
+
+class ThemeCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Theme
+        fields = "__all__"
+
+
+class ThemeListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Theme
+        fields = "__all__"
+
+
+class QuestionCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = "__all__"
+
+
+class ThemeQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('id', 'name', 'created_at', 'image_file')
+
+
+class ThemeQuestionsSerializer(serializers.ModelSerializer):
+    questions = ThemeQuestionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = ('name', 'questions')
