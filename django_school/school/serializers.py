@@ -1,17 +1,35 @@
 from rest_framework import serializers
 
-from .models import Grade, Profile, Theme, Question
+from .models import Grade, Profile, Theme, Question, QuestionForGrade, StudentJournal, Student
 
 
 class GradeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grade
-        fields = ('number', 'letter', 'grade_profile')
+        fields = ('id', 'number', 'letter', 'grade_profile')
 
     grade_profile = serializers.SerializerMethodField('get_grade_profile')
 
     def get_grade_profile(self, obj):
         return obj.profile.name
+
+
+class GradeCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Grade
+        fields = "__all__"
+
+
+class GradeDestroySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Grade
+        fields = "__all__"
+
+
+class GradeUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Grade
+        fields = "__all__"
 
 
 class ProfileListSerializer(serializers.ModelSerializer):
@@ -34,15 +52,33 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
         fields = ('name', 'grades')
 
 
-class GradeCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Grade
-        fields = "__all__"
-
-
 class ProfileCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
+        fields = "__all__"
+
+
+class ProfileDestroySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = "__all__"
+
+
+class ProfileUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = "__all__"
+
+
+class ThemeUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Theme
+        fields = "__all__"
+
+
+class ThemeDestroySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Theme
         fields = "__all__"
 
 
@@ -58,9 +94,27 @@ class ThemeListSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class QuestionUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Theme
+        fields = "__all__"
+
+
+class QuestionDestroySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = "__all__"
+
+
 class QuestionCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
+        fields = "__all__"
+
+
+class QuestionForGradeCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuestionForGrade
         fields = "__all__"
 
 
@@ -76,3 +130,15 @@ class ThemeQuestionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('name', 'questions')
+
+
+class AnswerQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentJournal
+        fields = "__all__"
+
+
+class StudentCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = "__all__"

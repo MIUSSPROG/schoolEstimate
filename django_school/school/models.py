@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 
 class Profile(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
 
 
 class Grade(models.Model):
@@ -52,7 +52,7 @@ class Question(models.Model):
     name = models.TextField()
     created_at = models.DateField(default=date.today)
     image_file = models.ImageField(upload_to="question_images/", default=None)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='questions')
+    theme_id = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='questions')
     grades = models.ManyToManyField(Grade, through='QuestionForGrade')
 
     class Meta:
@@ -68,7 +68,6 @@ class QuestionForGrade(models.Model):
     grade = models.ForeignKey(Grade, on_delete=models.CASCADE)
     created_at = models.DateField(default=date.today)
     deadline = models.DateField(default=date.today)
-    score = models.IntegerField()
 
     class Meta:
         unique_together = ('question', 'grade')
@@ -77,3 +76,20 @@ class QuestionForGrade(models.Model):
 
     def __str__(self):
         return f"{self.question} {self.grade} {self.deadline}"
+
+
+class StudentJournal(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True)
+    answer = models.TextField(default=None, null=True)
+    correct = models.BooleanField(default=None, null=True)
+    score = models.IntegerField(default=None, null=True)
+    date = models.DateField(default=date.today)
+
+    class Meta:
+        unique_together = ('student', 'question')
+        verbose_name = 'Журнал студента'
+        verbose_name_plural = "Журнал студентов"
+
+    def __str__(self):
+        return f"{self.student} {self.question} {self.score} {self.date}"
