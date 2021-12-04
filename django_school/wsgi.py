@@ -1,5 +1,5 @@
 """
-WSGI config for django_school project.
+WSGI config for django_school_to_delete project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_school.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_school_to_delete.settings')
 
 application = get_wsgi_application()
