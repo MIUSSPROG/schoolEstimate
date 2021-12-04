@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+import django_heroku
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,12 +79,21 @@ WSGI_APPLICATION = 'django_school.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'schoolGrades',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'Irtuganov21021991',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # }
+
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'schoolGrades',
-        'USER': 'postgres',
-        'PASSWORD': 'Irtuganov21021991',
-        'HOST': 'localhost',
+        'NAME': 'desdbqo0n1k8fn',
+        'USER': 'dhgqtajzsifgvd',
+        'PASSWORD': 'f8cfef7d47cf9f9c85af91f5bb41863dbe286b7fca7e33468efe5858301c5d08',
+        'HOST': 'ec2-54-89-105-122.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -170,3 +181,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
