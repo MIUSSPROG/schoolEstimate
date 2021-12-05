@@ -88,12 +88,21 @@ DATABASES = {
     #     'PORT': '5432',
     # }
 
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'desdbqo0n1k8fn',
+    #     'USER': 'dhgqtajzsifgvd',
+    #     'PASSWORD': 'f8cfef7d47cf9f9c85af91f5bb41863dbe286b7fca7e33468efe5858301c5d08',
+    #     'HOST': 'ec2-54-89-105-122.compute-1.amazonaws.com',
+    #     'PORT': '5432',
+    # }
+
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'desdbqo0n1k8fn',
-        'USER': 'dhgqtajzsifgvd',
-        'PASSWORD': 'f8cfef7d47cf9f9c85af91f5bb41863dbe286b7fca7e33468efe5858301c5d08',
-        'HOST': 'ec2-54-89-105-122.compute-1.amazonaws.com',
+        'NAME': 'd8i1s8l3r7li8v',
+        'USER': 'nfmfonhlkfpfrd',
+        'PASSWORD': '002d0383e5d246106d255e09e49cd28b69c02d2466c5e0551dc92c21b19f7786',
+        'HOST': 'ec2-54-195-76-73.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
