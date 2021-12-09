@@ -53,7 +53,7 @@ class Question(models.Model):
     created_at = models.DateField(default=date.today)
     image_file = models.ImageField(upload_to="question_images/", default=None)
     theme_id = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='questions')
-    grades = models.ManyToManyField(Grade, through='QuestionForGrade')
+    # grades = models.ManyToManyField(Grade, through='QuestionForGrade')
 
     class Meta:
         verbose_name = 'Вопрос'
@@ -64,18 +64,19 @@ class Question(models.Model):
 
 
 class QuestionForGrade(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, default=None)
+    # question = models.ForeignKey(Question, on_delete=models.CASCADE)
     grade = models.ForeignKey(Grade, on_delete=models.CASCADE)
     created_at = models.DateField(default=date.today)
     deadline = models.DateField(default=date.today)
 
     class Meta:
-        unique_together = ('question', 'grade')
+        unique_together = ('theme', 'grade')
         verbose_name = 'Вопрос для классы'
         verbose_name_plural = "Вопросы для класса"
 
     def __str__(self):
-        return f"{self.question} {self.grade} {self.deadline}"
+        return f"{self.theme} {self.grade} {self.deadline}"
 
 
 class StudentJournal(models.Model):
