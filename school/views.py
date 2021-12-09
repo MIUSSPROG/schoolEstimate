@@ -15,6 +15,13 @@ from .serializers import GradeListSerializer, GradeCreateSerializer, ProfileCrea
 class GradeListView(generics.ListAPIView):
     serializer_class = GradeListSerializer
     queryset = Grade.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        num = request.query_params["num"]
+        if num != None:
+            grade_list = Grade.objects.filter(number=num)
+            serializer = GradeParamSerializer(grade_list, many=True)
+        return Response(serializer.data)
     # filter_backends = (DjangoFilterBackend,)
 
 
@@ -28,7 +35,6 @@ class GradeAPIView(APIView):
     def get(self, request, *args, **kwargs):
         num = request.query_params["num"]
         if num != None:
-            # grade_list = Grade.objects.get(number=num)
             grade_list = Grade.objects.filter(number=num)
             serializer = GradeParamSerializer(grade_list, many=True)
         return Response(serializer.data)
