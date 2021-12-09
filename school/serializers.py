@@ -3,15 +3,15 @@ from rest_framework import serializers
 from .models import Grade, Profile, Theme, Question, QuestionForGrade, StudentJournal, Student
 
 
-class GradeListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Grade
-        fields = ('id', 'number', 'letter', 'grade_profile')
-
-    grade_profile = serializers.SerializerMethodField('get_grade_profile')
-
-    def get_grade_profile(self, obj):
-        return obj.profile.name
+# class GradeListSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Grade
+#         fields = ('id', 'number', 'letter', 'grade_profile')
+#
+#     grade_profile = serializers.SerializerMethodField('get_grade_profile')
+#
+#     def get_grade_profile(self, obj):
+#         return obj.profile.name
 
 
 class GradeCreateSerializer(serializers.ModelSerializer):
@@ -143,7 +143,12 @@ class GradeStudentsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Grade
-        fields = ('number', 'letter', 'profile', 'students')
+        fields = ('number', 'letter', 'grade_profile', 'students')
+
+    grade_profile = serializers.SerializerMethodField('get_grade_profile')
+
+    def get_grade_profile(self, obj):
+        return obj.profile.name
 
 
 class AnswerQuestionSerializer(serializers.ModelSerializer):
@@ -156,3 +161,14 @@ class StudentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = "__all__"
+
+
+class GradeListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Grade
+        fields = ('id', 'number', 'letter', 'grade_profile')
+
+    grade_profile = serializers.SerializerMethodField('get_grade_profile')
+
+    def get_grade_profile(self, obj):
+        return obj.profile.name
