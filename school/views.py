@@ -1,5 +1,7 @@
 # from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework.views import APIView
 
 from .models import Grade, Profile, Theme, Question, QuestionForGrade, StudentJournal, Student
 from .serializers import GradeListSerializer, GradeCreateSerializer, ProfileCreateSerializer, ProfileListSerializer, \
@@ -7,13 +9,28 @@ from .serializers import GradeListSerializer, GradeCreateSerializer, ProfileCrea
     ThemeQuestionsSerializer, GradeDestroySerializer, ProfileDestroySerializer, QuestionDestroySerializer, \
     ThemeDestroySerializer, QuestionUpdateSerializer, ProfileUpdateSerializer, GradeUpdateSerializer, \
     ThemeUpdateSerializer, QuestionForGradeCreateSerializer, AnswerQuestionSerializer, StudentCreateSerializer, \
-    GradeStudentsSerializer
+    GradeStudentsSerializer, GradeParamSerializer
 
 
 class GradeListView(generics.ListAPIView):
     serializer_class = GradeListSerializer
     queryset = Grade.objects.all()
     # filter_backends = (DjangoFilterBackend,)
+
+
+class GradeAPIView(APIView):
+    serializer_class = GradeParamSerializer
+
+    def get_queryset(self):
+        grades = Grade.objects.all()
+        return grades
+
+    def get(self, request, *args, **kwargs):
+        num = request.query_params["num"]
+        if num != None:
+            grade_list = Grade.objects.get(number=num)
+            serializer = GradeParamSerializer(grade_list)
+        return Response(serializer.data)
 
 
 class GradeCreateView(generics.CreateAPIView):

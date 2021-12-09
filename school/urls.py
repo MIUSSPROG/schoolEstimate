@@ -23,5 +23,6 @@ urlpatterns = [
     path("question_for_class/", views.QuestionForGradeCreateView.as_view()),
     path("answer_question/", views.AnswerQuestionView.as_view()),
     path("student/", views.StudentCreateView.as_view()),
-    path("students_of_grade/<int:pk>", views.GradeStudentsDetailView.as_view())
+    path("students_of_grade/<int:pk>", views.GradeStudentsDetailView.as_view()),
+    path("test/", views.GradeAPIView.as_view())
 ]
