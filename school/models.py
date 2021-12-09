@@ -3,7 +3,7 @@ from datetime import date
 from django.db import models
 
 
-# Create your models here.
+# Working version
 
 class Profile(models.Model):
     name = models.CharField(max_length=30, unique=True)
