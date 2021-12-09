@@ -132,6 +132,20 @@ class ThemeQuestionsSerializer(serializers.ModelSerializer):
         fields = ('name', 'questions')
 
 
+class GradeStudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('name', 'userId')
+
+
+class GradeStudentsSerializer(serializers.ModelSerializer):
+    students = GradeStudentSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Grade
+        fields = ('number', 'letter', 'profile', 'students')
+
+
 class AnswerQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentJournal

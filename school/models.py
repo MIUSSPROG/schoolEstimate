@@ -25,7 +25,7 @@ class Grade(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
-    login = models.CharField(max_length=50)
+    userId = models.CharField(max_length=50)
     grade = models.ForeignKey(Grade, on_delete=models.SET_NULL, null=True, related_name='students')
 
     class Meta:

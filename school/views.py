@@ -6,7 +6,8 @@ from .serializers import GradeListSerializer, GradeCreateSerializer, ProfileCrea
     ProfileDetailSerializer, ThemeCreateSerializer, QuestionCreateSerializer, ThemeListSerializer, \
     ThemeQuestionsSerializer, GradeDestroySerializer, ProfileDestroySerializer, QuestionDestroySerializer, \
     ThemeDestroySerializer, QuestionUpdateSerializer, ProfileUpdateSerializer, GradeUpdateSerializer, \
-    ThemeUpdateSerializer, QuestionForGradeCreateSerializer, AnswerQuestionSerializer, StudentCreateSerializer
+    ThemeUpdateSerializer, QuestionForGradeCreateSerializer, AnswerQuestionSerializer, StudentCreateSerializer, \
+    GradeStudentsSerializer
 
 
 class GradeListView(generics.ListAPIView):
@@ -86,6 +87,11 @@ class ThemeQuestionDetailView(generics.RetrieveAPIView):
     serializer_class = ThemeQuestionsSerializer
     queryset = Theme.objects.all()
     # filter_backends = (DjangoFilterBackend,)
+
+
+class GradeStudentsDetailView(generics.RetrieveAPIView):
+    serializer_class = GradeStudentsSerializer
+    queryset = Grade.objects.all()
 
 
 class ProfileListView(generics.ListAPIView):
