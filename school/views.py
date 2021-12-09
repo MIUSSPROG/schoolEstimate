@@ -30,7 +30,7 @@ class GradeAPIView(APIView):
         if num != None:
             # grade_list = Grade.objects.get(number=num)
             grade_list = Grade.objects.filter(number=num)
-            serializer = GradeParamSerializer(grade_list)
+            serializer = GradeParamSerializer(grade_list, many=True)
         return Response(serializer.data)
 
 
