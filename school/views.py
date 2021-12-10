@@ -18,7 +18,7 @@ class GradeListView(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
         num = request.query_params["num"]
-        if num != None:
+        if num is not None:
             if num == 'all':
                 grade_list = Grade.objects.all()
                 serializer = GradeListSerializer(grade_list, many=True)
@@ -27,6 +27,19 @@ class GradeListView(generics.ListAPIView):
                 serializer = GradeListSerializer(grade_list, many=True)
         return Response(serializer.data)
     # filter_backends = (DjangoFilterBackend,)
+
+
+class GradeDetailView(generics.ListAPIView):
+    serializer_class = GradeListSerializer
+    queryset = Grade.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        number = request.query_params["num"]
+        letter = request.query_params["letter"]
+        if number is not None and letter is not None:
+            grade_info = Grade.objects.get(number=number, letter=letter)
+            serializer = GradeListSerializer(grade_info)
+        return Response(serializer.data)
 
 
 # class GradeAPIView(APIView):

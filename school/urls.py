@@ -7,6 +7,7 @@ urlpatterns = [
     path("grade/", views.GradeCreateView.as_view()),
     path("grade/<int:pk>/", views.GradeDeleteView.as_view()),
     path("grade/update/<int:pk>/", views.GradeUpdateView.as_view()),
+    path("grade_id/", views.GradeDetailView.as_view()),
     path("profile/", views.ProfileCreateView.as_view()),
     path("profiles/", views.ProfileListView.as_view()),
     path("profile/<int:pk>/", views.ProfileDetailView.as_view()),
