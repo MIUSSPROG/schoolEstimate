@@ -38,8 +38,11 @@ class GradeDetailView(generics.ListAPIView):
         letter = request.query_params["letter"]
         if number is not None and letter is not None:
             grade_info = Grade.objects.get(number=number, letter=letter)
-            serializer = GradeListSerializer(grade_info)
-        return Response(serializer.data)
+            if grade_info is not None:
+                serializer = GradeListSerializer(grade_info)
+                return Response(serializer.data)
+            else:
+                Response(None)
 
 
 # class GradeAPIView(APIView):
