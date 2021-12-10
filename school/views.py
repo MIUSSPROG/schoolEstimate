@@ -25,11 +25,12 @@ class GradeAPIView(APIView):
     def get(self, request, *args, **kwargs):
         num = request.query_params["num"]
         if num != None:
-            grade_list = Grade.objects.filter(number=num)
-            serializer = GradeListSerializer(grade_list, many=True)
-        else:
-            grade_list = Grade.objects.all()
-            serializer = GradeListSerializer(grade_list, many=True)
+            if num == 'all':
+                grade_list = Grade.objects.all()
+                serializer = GradeListSerializer(grade_list, many=True)
+            else:
+                grade_list = Grade.objects.filter(number=num)
+                serializer = GradeListSerializer(grade_list, many=True)
         return Response(serializer.data)
 
 
