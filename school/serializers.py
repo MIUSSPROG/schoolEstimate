@@ -140,7 +140,7 @@ class GradeStudentSerializer(serializers.ModelSerializer):
 
 
 class QuestionForGradeSerializer(serializers.ModelSerializer):
-    themes = ThemeListSerializer(many=True, read_only=True)
+    # themes = ThemeListSerializer(many=True, read_only=True)
 
     class Meta:
         model = QuestionForGrade
