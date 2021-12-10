@@ -88,6 +88,12 @@ class ThemeCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class QuestionForGradeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuestionForGrade
+        fields = '__all__'
+
+
 class ThemeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Theme
@@ -173,4 +179,3 @@ class GradeListSerializer(serializers.ModelSerializer):
 
     def get_grade_profile(self, obj):
         return obj.profile.name
-

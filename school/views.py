@@ -9,7 +9,7 @@ from .serializers import GradeListSerializer, GradeCreateSerializer, ProfileCrea
     ThemeQuestionsSerializer, GradeDestroySerializer, ProfileDestroySerializer, QuestionDestroySerializer, \
     ThemeDestroySerializer, QuestionUpdateSerializer, ProfileUpdateSerializer, GradeUpdateSerializer, \
     ThemeUpdateSerializer, QuestionForGradeCreateSerializer, AnswerQuestionSerializer, StudentCreateSerializer, \
-    GradeStudentsSerializer
+    GradeStudentsSerializer, QuestionForGradeSerializer
 
 
 class GradeListView(generics.ListAPIView):
@@ -27,6 +27,21 @@ class GradeListView(generics.ListAPIView):
                 serializer = GradeListSerializer(grade_list, many=True)
         return Response(serializer.data)
     # filter_backends = (DjangoFilterBackend,)
+
+
+class ThemeForGrade(generics.ListAPIView):
+    serializer_class = QuestionForGradeSerializer
+    queryset = QuestionForGrade.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        number = request.query_params["num"]
+        letter = request.query_params["letter"]
+        if number is not None and letter is not None:
+            grade = Grade.objects.get(number=number, letter=letter)
+            grade_id = grade.pk
+            questions_for_grade_list = QuestionForGrade.objects.filter(grade_id=grade_id)
+            serializer = QuestionForGradeSerializer(questions_for_grade_list, many=True)
+        return Response(serializer.data)
 
 
 class GradeDetailView(generics.ListAPIView):
