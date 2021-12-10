@@ -45,7 +45,7 @@ class ThemeForGrade(generics.ListAPIView):
 
 
 class ThemeByUserId(generics.ListAPIView):
-    serializer_class = QuestionByUserIdSerializer
+    serializer_class = QuestionForGradeSerializerByUserId
     queryset = Question.objects.all()
 
     def get(self, request, *args, **kwargs):
