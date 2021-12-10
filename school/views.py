@@ -19,17 +19,17 @@ class GradeListView(generics.ListAPIView):
 
 
 class GradeAPIView(APIView):
-    serializer_class = GradeParamSerializer
+    serializer_class = GradeListSerializer
     queryset = Grade.objects.all()
-    # def get_queryset(self):
-    #     grades = Grade.objects.all()
-    #     return grades
 
     def get(self, request, *args, **kwargs):
         num = request.query_params["num"]
         if num != None:
             grade_list = Grade.objects.filter(number=num)
-            serializer = GradeParamSerializer(grade_list, many=True)
+            serializer = GradeListSerializer(grade_list, many=True)
+        else:
+            grade_list = Grade.objects.all()
+            serializer = GradeListSerializer(grade_list, many=True)
         return Response(serializer.data)
 
 
