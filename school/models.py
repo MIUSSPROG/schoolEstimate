@@ -52,7 +52,7 @@ class Question(models.Model):
     name = models.TextField()
     created_at = models.DateField(default=date.today)
     image_file = models.ImageField(upload_to="question_images/", default=None)
-    theme_id = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='questions')
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='questions')
     # grades = models.ManyToManyField(Grade, through='QuestionForGrade')
 
     class Meta:

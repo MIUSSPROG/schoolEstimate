@@ -128,7 +128,8 @@ class ThemeQuestionsSerializer(serializers.ModelSerializer):
     questions = ThemeQuestionSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Profile
+        # model = Profile
+        model = Theme
         fields = ('name', 'questions')
 
 
