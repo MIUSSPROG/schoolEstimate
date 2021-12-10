@@ -9,16 +9,10 @@ from .serializers import GradeListSerializer, GradeCreateSerializer, ProfileCrea
     ThemeQuestionsSerializer, GradeDestroySerializer, ProfileDestroySerializer, QuestionDestroySerializer, \
     ThemeDestroySerializer, QuestionUpdateSerializer, ProfileUpdateSerializer, GradeUpdateSerializer, \
     ThemeUpdateSerializer, QuestionForGradeCreateSerializer, AnswerQuestionSerializer, StudentCreateSerializer, \
-    GradeStudentsSerializer, GradeParamSerializer
+    GradeStudentsSerializer
 
 
 class GradeListView(generics.ListAPIView):
-    serializer_class = GradeListSerializer
-    queryset = Grade.objects.all()
-    # filter_backends = (DjangoFilterBackend,)
-
-
-class GradeAPIView(APIView):
     serializer_class = GradeListSerializer
     queryset = Grade.objects.all()
 
@@ -32,6 +26,23 @@ class GradeAPIView(APIView):
                 grade_list = Grade.objects.filter(number=num)
                 serializer = GradeListSerializer(grade_list, many=True)
         return Response(serializer.data)
+    # filter_backends = (DjangoFilterBackend,)
+
+
+# class GradeAPIView(APIView):
+#     serializer_class = GradeListSerializer
+#     queryset = Grade.objects.all()
+#
+#     def get(self, request, *args, **kwargs):
+#         num = request.query_params["num"]
+#         if num != None:
+#             if num == 'all':
+#                 grade_list = Grade.objects.all()
+#                 serializer = GradeListSerializer(grade_list, many=True)
+#             else:
+#                 grade_list = Grade.objects.filter(number=num)
+#                 serializer = GradeListSerializer(grade_list, many=True)
+#         return Response(serializer.data)
 
 
 class GradeCreateView(generics.CreateAPIView):

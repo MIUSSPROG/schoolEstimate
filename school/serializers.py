@@ -173,8 +173,3 @@ class GradeListSerializer(serializers.ModelSerializer):
     def get_grade_profile(self, obj):
         return obj.profile.name
 
-
-class GradeParamSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Grade
-        fields = "__all__"
