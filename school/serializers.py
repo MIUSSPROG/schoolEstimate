@@ -144,9 +144,9 @@ class QuestionForGradeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = QuestionForGrade
-        fields = ('deadline', 'theme_names')
+        fields = ('deadline', 'theme_name')
 
-    theme_names = serializers.SerializerMethodField('get_theme_names')
+    theme_name = serializers.SerializerMethodField('get_theme_names')
 
     def get_theme_names(self, obj):
         return obj.theme.name
