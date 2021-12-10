@@ -159,11 +159,11 @@ class QuestionForGradeSerializer(serializers.ModelSerializer):
 
 
 class QuestionForGradeSerializerByUserId(serializers.ModelSerializer):
-    themes = ThemeListSerializer(many=True, read_only=True)
+    questions = QuestionByUserIdSerializer(many=True, read_only=True)
 
     class Meta:
         model = QuestionForGrade
-        fields = ('theme_id', 'deadline', 'theme_name', 'themes')
+        fields = ('theme_id', 'deadline', 'theme_name', 'questions')
 
     theme_name = serializers.SerializerMethodField('get_theme_names')
 
