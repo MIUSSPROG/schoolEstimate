@@ -94,6 +94,12 @@ class ThemeListSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class QuestionByUserIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('id', 'name')
+
+
 class QuestionUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Theme
@@ -145,6 +151,19 @@ class QuestionForGradeSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionForGrade
         fields = ('theme_id', 'deadline', 'theme_name')
+
+    theme_name = serializers.SerializerMethodField('get_theme_names')
+
+    def get_theme_names(self, obj):
+        return obj.theme.name
+
+
+class QuestionForGradeSerializerByUserId(serializers.ModelSerializer):
+    themes = ThemeListSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = QuestionForGrade
+        fields = ('theme_id', 'deadline', 'theme_name', 'themes')
 
     theme_name = serializers.SerializerMethodField('get_theme_names')
 

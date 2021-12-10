@@ -9,7 +9,7 @@ from .serializers import GradeListSerializer, GradeCreateSerializer, ProfileCrea
     ThemeQuestionsSerializer, GradeDestroySerializer, ProfileDestroySerializer, QuestionDestroySerializer, \
     ThemeDestroySerializer, QuestionUpdateSerializer, ProfileUpdateSerializer, GradeUpdateSerializer, \
     ThemeUpdateSerializer, QuestionForGradeCreateSerializer, AnswerQuestionSerializer, StudentCreateSerializer, \
-    GradeStudentsSerializer, QuestionForGradeSerializer
+    GradeStudentsSerializer, QuestionForGradeSerializer, QuestionByUserIdSerializer, QuestionForGradeSerializerByUserId
 
 
 class GradeListView(generics.ListAPIView):
@@ -41,6 +41,20 @@ class ThemeForGrade(generics.ListAPIView):
             grade_id = grade.pk
             questions_for_grade_list = QuestionForGrade.objects.filter(grade_id=grade_id)
             serializer = QuestionForGradeSerializer(questions_for_grade_list, many=True)
+        return Response(serializer.data)
+
+
+class ThemeByUserId(generics.ListAPIView):
+    serializer_class = QuestionByUserIdSerializer
+    queryset = Question.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        userId = request.query_params["userId"]
+        if userId is not None:
+            student = Student.objects.get(userId=userId)
+            grade_id = student.grade.pk
+            themes = QuestionForGrade.objects.filter(grade_id=grade_id)
+            serializer = QuestionForGradeSerializerByUserId(themes, many=True)
         return Response(serializer.data)
 
 

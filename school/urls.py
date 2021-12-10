@@ -26,4 +26,5 @@ urlpatterns = [
     path("answer_question/", views.AnswerQuestionView.as_view()),
     path("student/", views.StudentCreateView.as_view()),
     path("students_of_grade/<int:pk>", views.GradeStudentsDetailView.as_view()),
+    path("question_by_userId/", views.ThemeByUserId.as_view())
 ]
