@@ -88,12 +88,6 @@ class ThemeCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class QuestionForGradeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = QuestionForGrade
-        fields = '__all__'
-
-
 class ThemeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Theme
@@ -143,6 +137,19 @@ class GradeStudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ('name', 'userId')
+
+
+class QuestionForGradeSerializer(serializers.ModelSerializer):
+    themes = ThemeListSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = QuestionForGrade
+        fields = ('deadline', 'theme_names')
+
+    theme_names = serializers.SerializerMethodField('get_theme_names')
+
+    def get_theme_names(self, obj):
+        return obj.theme.name
 
 
 class GradeStudentsSerializer(serializers.ModelSerializer):

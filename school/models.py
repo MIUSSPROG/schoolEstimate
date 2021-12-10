@@ -64,7 +64,7 @@ class Question(models.Model):
 
 
 class QuestionForGrade(models.Model):
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, default=None)
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='questions_for_grade')
     # question = models.ForeignKey(Question, on_delete=models.CASCADE)
     grade = models.ForeignKey(Grade, on_delete=models.CASCADE)
     created_at = models.DateField(default=date.today)
