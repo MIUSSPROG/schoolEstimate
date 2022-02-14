@@ -193,7 +193,7 @@ class AnswerQuestionSerializer(serializers.ModelSerializer):
 class StudentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = "__all__"
+        fields = ('name', 'userId', 'grade', 'image')
 
 
 class GradeListSerializer(serializers.ModelSerializer):
