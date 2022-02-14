@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'djoser',
     'school',
     'drf_yasg',
-    'django_filters'
+    'django_filters',
+    'versatileimagefield'
 ]
 
 MIDDLEWARE = [
@@ -99,13 +100,20 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8i1s8l3r7li8v',
-        'USER': 'nfmfonhlkfpfrd',
-        'PASSWORD': '002d0383e5d246106d255e09e49cd28b69c02d2466c5e0551dc92c21b19f7786',
-        'HOST': 'ec2-54-195-76-73.eu-west-1.compute.amazonaws.com',
+        'NAME': 'db9vbd05vqorbu',
+        'USER': 'htwtvvmetdjkag',
+        'PASSWORD': '73bd280af040f9cceb49a4106fa652c55a5c99181e18915d0c690830fc9f4d17',
+        'HOST': 'ec2-54-216-90-155.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
+
+# 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+# 'NAME': 'd8i1s8l3r7li8v',
+# 'USER': 'nfmfonhlkfpfrd',
+# 'PASSWORD': '002d0383e5d246106d255e09e49cd28b69c02d2466c5e0551dc92c21b19f7786',
+# 'HOST': 'ec2-54-195-76-73.eu-west-1.compute.amazonaws.com',
+# 'PORT': '5432',
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

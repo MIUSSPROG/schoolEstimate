@@ -21,10 +21,10 @@ class GradeListView(generics.ListAPIView):
         if num is not None:
             if num == 'all':
                 grade_list = Grade.objects.all()
-                serializer = GradeListSerializer(grade_list, many=True)
             else:
                 grade_list = Grade.objects.filter(number=num)
-                serializer = GradeListSerializer(grade_list, many=True)
+
+            serializer = GradeListSerializer(grade_list, many=True)
         return Response(serializer.data)
     # filter_backends = (DjangoFilterBackend,)
 
@@ -171,7 +171,6 @@ class GradeStudentsDetailView(generics.RetrieveAPIView):
 class ProfileListView(generics.ListAPIView):
     serializer_class = ProfileListSerializer
     queryset = Profile.objects.all()
-    # filter_backends = (DjangoFilterBackend,)
 
 
 class ProfileDetailView(generics.RetrieveAPIView):

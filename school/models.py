@@ -4,6 +4,8 @@ from django.db import models
 
 
 # Working version
+from versatileimagefield.fields import VersatileImageField, PPOIField
+
 
 class Profile(models.Model):
     name = models.CharField(max_length=30, unique=True)
@@ -26,6 +28,13 @@ class Grade(models.Model):
 class Student(models.Model):
     name = models.CharField(max_length=100)
     userId = models.CharField(max_length=50)
+    image = VersatileImageField(
+        'Image',
+        upload_to='images/',
+        ppoi_field='image_ppoi',
+        default=''
+    )
+    image_ppoi = PPOIField()
     grade = models.ForeignKey(Grade, on_delete=models.SET_NULL, null=True, related_name='students')
 
     class Meta:
@@ -53,6 +62,7 @@ class Question(models.Model):
     created_at = models.DateField(default=date.today)
     image_file = models.ImageField(upload_to="question_images/", default=None)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='questions')
+
     # grades = models.ManyToManyField(Grade, through='QuestionForGrade')
 
     class Meta:
