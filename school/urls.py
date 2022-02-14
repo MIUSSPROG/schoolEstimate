@@ -24,7 +24,7 @@ urlpatterns = [
     path("theme/<int:pk>/", views.ThemeQuestionDetailView.as_view()),
     path("question_for_class/", views.QuestionForGradeCreateView.as_view()),
     path("answer_question/", views.AnswerQuestionView.as_view()),
-    path("student/", views.StudentCreateViewImage.as_view()),
+    path("student/", views.StudentCreateViewImage),
     path("students_of_grade/<int:pk>", views.GradeStudentsDetailView.as_view()),
     path("question_by_userId/", views.ThemeByUserId.as_view())
 ]
