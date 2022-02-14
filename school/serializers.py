@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from versatileimagefield.serializers import VersatileImageFieldSerializer
 
 from .models import Grade, Profile, Theme, Question, QuestionForGrade, StudentJournal, Student
 
@@ -191,6 +192,16 @@ class AnswerQuestionSerializer(serializers.ModelSerializer):
 
 
 class StudentCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('name', 'userId', 'grade', 'image')
+
+
+class StudentImageSerializer(serializers.ModelSerializer):
+    image = VersatileImageFieldSerializer(
+        sizes='product_headshot'
+    )
+
     class Meta:
         model = Student
         fields = ('name', 'userId', 'grade', 'image')

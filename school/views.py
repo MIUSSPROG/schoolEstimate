@@ -1,4 +1,5 @@
 # from django_filters.rest_framework import DjangoFilterBackend
+from rest_flex_fields import FlexFieldsModelViewSet
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.views import APIView
@@ -9,7 +10,8 @@ from .serializers import GradeListSerializer, GradeCreateSerializer, ProfileCrea
     ThemeQuestionsSerializer, GradeDestroySerializer, ProfileDestroySerializer, QuestionDestroySerializer, \
     ThemeDestroySerializer, QuestionUpdateSerializer, ProfileUpdateSerializer, GradeUpdateSerializer, \
     ThemeUpdateSerializer, QuestionForGradeCreateSerializer, AnswerQuestionSerializer, StudentCreateSerializer, \
-    GradeStudentsSerializer, QuestionForGradeSerializer, QuestionByUserIdSerializer, QuestionForGradeSerializerByUserId
+    GradeStudentsSerializer, QuestionForGradeSerializer, QuestionByUserIdSerializer, QuestionForGradeSerializerByUserId, \
+    StudentImageSerializer
 
 
 class GradeListView(generics.ListAPIView):
@@ -186,4 +188,9 @@ class AnswerQuestionView(generics.CreateAPIView):
 
 class StudentCreateView(generics.CreateAPIView):
     serializer_class = StudentCreateSerializer
+    queryset = Student.objects.all()
+
+
+class StudentCreateViewImage(FlexFieldsModelViewSet):
+    serializer_class = StudentImageSerializer
     queryset = Student.objects.all()
