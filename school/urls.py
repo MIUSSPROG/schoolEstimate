@@ -17,7 +17,7 @@ urlpatterns = [
     path("themes/", views.ThemeListView.as_view()),
     path("theme/delete/<int:pk>/", views.ThemeDeleteView.as_view()),
     path("theme/update/<int:pk>/", views.ThemeUpdateView.as_view()),
-    path("themes_of_grades", views.ThemeForGrade.as_view()),
+    path("themes_of_grades/", views.ThemeForGrade.as_view()),
     path("question/", views.QuestionCreateView.as_view()),
     path("question/update/<int:pk>/", views.QuestionUpdateView.as_view()),
     path("question/<int:pk>/", views.QuestionDeleteView.as_view()),
