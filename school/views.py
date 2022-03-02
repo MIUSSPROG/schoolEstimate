@@ -57,7 +57,9 @@ class ThemeByUserId(generics.ListAPIView):
             grade_id = student.grade.pk
             themes = QuestionForGrade.objects.filter(grade_id=grade_id)
             serializer = QuestionForGradeSerializerByUserId(themes, many=True)
-        return Response(serializer.data)
+            return Response(serializer.data)
+        else:
+            return Response(None)
 
 
 class GradeDetailView(generics.ListAPIView):
