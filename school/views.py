@@ -59,7 +59,7 @@ class ThemeByUserId(generics.ListAPIView):
             serializer = QuestionForGradeSerializerByUserId(themes, many=True)
             return Response(serializer.data)
         else:
-            return Response(None)
+            return Response({'error': 'userId not found'})
 
 
 class GradeDetailView(generics.ListAPIView):
